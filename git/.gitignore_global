@@ -1,0 +1,27 @@
+# Common patterns to ignore globally across all repos
+# Symlinked into ~/.gitignore_global by install.sh
+
+# --- Editor artifacts ---
+*.swp
+*.swo
+*.orig
+*~
+.idea/
+.vscode/
+*.iml
+
+# --- OS artifacts ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# --- Secrets (belt-and-suspenders) ---
+.env
+.env.local
+.env.*.local

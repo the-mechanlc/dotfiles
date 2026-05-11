@@ -1,0 +1,33 @@
+[user]
+	name = the-mechanlc
+	# email = you@example.com   # set with: git config --global user.email "you@example.com"
+
+[core]
+	editor = vim
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[fetch]
+	prune = true
+
+[push]
+	default = current
+
+[merge]
+	tool = vimdiff
+
+[alias]
+	st = status
+	lg = log --oneline --graph --decorate --all
+	undo = reset HEAD~1 --mixed
+	unstage = reset HEAD --
+	aliases = config --get-regexp alias
+
+[color]
+	ui = auto
