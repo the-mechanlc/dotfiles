@@ -39,8 +39,10 @@ latest_github_release() {
 if ! command -v kubectl &>/dev/null; then
   echo "==> Installing kubectl..."
   KUBECTL_VER=$(curl -fsSL https://dl.k8s.io/release/stable.txt)
-  curl -fsSLo /tmp/kubectl "https://dl.k8s.io/release/${KUBECTL_VER}/bin/linux/${ARCH}/kubectl"
-  chmod +x /tmp/kubectl && sudo mv /tmp/kubectl /usr/local/bin/
+  _tmpdir=$(mktemp -d)
+  curl -fsSLo "$_tmpdir/kubectl" "https://dl.k8s.io/release/${KUBECTL_VER}/bin/linux/${ARCH}/kubectl"
+  chmod +x "$_tmpdir/kubectl" && sudo mv "$_tmpdir/kubectl" /usr/local/bin/
+  rm -rf "$_tmpdir"; _tmpdir=""
   echo "  kubectl ${KUBECTL_VER} ✓"
 else echo "  kubectl already installed"; fi
 
@@ -50,7 +52,7 @@ if ! command -v helm &>/dev/null; then
   _tmpdir=$(mktemp -d)
   curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 -o "$_tmpdir/get-helm.sh"
   chmod +x "$_tmpdir/get-helm.sh" && "$_tmpdir/get-helm.sh"
-  _tmpdir=""  # reset so trap doesn't try to delete already-cleaned dir
+  rm -rf "$_tmpdir"; _tmpdir=""
   echo "  helm ✓"
 else echo "  helm already installed"; fi
 
