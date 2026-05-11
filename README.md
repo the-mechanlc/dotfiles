@@ -6,12 +6,12 @@ Personal dotfiles for shell, git, vim, and tmux — managed with symlinks via `i
 
 | Path | Description |
 |------|-------------|
-| `zsh/.zshrc` | Zsh config — oh-my-zsh, agnoster theme, aliases, k8s shortcuts |
-| `bash/.bashrc` | Bash config — history, PATH, environment |
-| `bash/.bash_aliases` | Shared aliases (general, git, kubernetes) |
+| `zsh/.zshrc` | Zsh config — oh-my-zsh, agnoster theme, sources shared aliases |
+| `bash/.bashrc` | Bash config — history, PATH, sources shared aliases |
+| `bash/.bash_aliases` | Shared aliases for both bash and zsh (general, git, kubernetes) |
 | `git/.gitconfig` | Git config — editor, pull strategy, useful aliases |
 | `git/.gitignore_global` | Global gitignore — editor artifacts, OS files, secrets |
-| `vim/.vimrc` | Vim config — sensible defaults, persistent undo, keybinds |
+| `vim/.vimrc` | Vim config — sensible defaults, persistent undo, split navigation |
 | `tmux/.tmux.conf` | Tmux config — mouse, vi mode, splits, status bar |
 | `scripts/install-tools.sh` | Installs CLI tools: kubectl, helm, eksctl, k9s, stern, gh |
 
@@ -42,22 +42,23 @@ Installs: `kubectl`, `helm`, `eksctl`, `kubectx`, `kubens`, `k9s`, `stern`, `gh`
 
 ## Post-Install Steps
 
-1. **Set your git email:**
+1. **Set your git identity:**
    ```bash
+   git config --global user.name  "Your Name"
    git config --global user.email "you@example.com"
    ```
 
 2. **Create `~/.env.local`** for machine-specific exports that shouldn't be committed:
    ```bash
    # ~/.env.local — not tracked by git
-   export CLAUDE_CODE_USE_BEDROCK=1
+   export HERMES_HOME=/your/hermes/path   # defaults to $HOME if unset
    export AWS_REGION=us-east-1
    export AWS_DEFAULT_REGION=us-east-1
-   export GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE=~/.config/gws/oauth_credentials.json
+   # Add any other machine-specific vars here
    ```
    Both `.zshrc` and `.bashrc` will auto-source this file if it exists.
 
-3. **Configure AWS credentials:**
+3. **Configure AWS credentials** (if using AWS tools):
    ```bash
    aws configure
    ```

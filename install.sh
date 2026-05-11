@@ -33,7 +33,7 @@ backup_and_link "$DOTFILES_DIR/bash/.bash_aliases" "$HOME/.bash_aliases"
 
 # --- Git ---
 echo "==> Linking git config..."
-backup_and_link "$DOTFILES_DIR/git/.gitconfig"       "$HOME/.gitconfig"
+backup_and_link "$DOTFILES_DIR/git/.gitconfig"        "$HOME/.gitconfig"
 backup_and_link "$DOTFILES_DIR/git/.gitignore_global" "$HOME/.gitignore_global"
 
 # --- Vim ---
@@ -45,6 +45,8 @@ echo "==> Linking tmux config..."
 backup_and_link "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
 # --- oh-my-zsh ---
+# Note: the install script is fetched over HTTPS and executed directly.
+# Review it at https://github.com/ohmyzsh/ohmyzsh before proceeding.
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo ""
   echo "==> Installing oh-my-zsh..."
@@ -74,6 +76,8 @@ echo ""
 echo "==> Done! Open a new shell or run: source ~/.zshrc"
 echo ""
 echo "Post-install steps:"
-echo "  1. Set your git email:  git config --global user.email \"you@example.com\""
-echo "  2. Create ~/.env.local for machine-specific exports (AWS region, API keys, etc.)"
+echo "  1. Set your git identity:"
+echo "       git config --global user.name  \"Your Name\""
+echo "       git config --global user.email \"you@example.com\""
+echo "  2. Create ~/.env.local for machine-specific exports (see README)"
 echo "  3. Optional: run scripts/install-tools.sh to install CLI tools"

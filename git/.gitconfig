@@ -1,5 +1,5 @@
 [user]
-	name = the-mechanlc
+	# name = Your Name   # set with: git config --global user.name "Your Name"
 	# email = you@example.com   # set with: git config --global user.email "you@example.com"
 
 [core]

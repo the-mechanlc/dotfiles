@@ -27,7 +27,7 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# --- Aliases ---
+# --- Shared aliases ---
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -42,14 +42,14 @@ if ! shopt -oq posix; then
 fi
 
 # --- Environment ---
-export HERMES_HOME=/data/hermes
-export PATH="$HOME/.local/bin:$HOME/.hermes/node/bin:/usr/local/bin:$PATH"
+export HERMES_HOME="${HERMES_HOME:-$HOME}"
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 export EDITOR=vim
 export KUBECONFIG=~/.kube/config
 
 # --- Local overrides (not tracked) ---
-# Machine-specific env vars (AWS region, credentials, API keys, etc.)
-# go in ~/.env.local which is never committed.
+# Create ~/.env.local for machine-specific exports:
+#   HERMES_HOME, AWS_REGION, API keys, credentials paths, etc.
 if [ -f "$HOME/.env.local" ]; then
   source "$HOME/.env.local"
 fi

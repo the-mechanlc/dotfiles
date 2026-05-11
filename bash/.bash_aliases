@@ -1,4 +1,4 @@
-# ~/.bash_aliases
+# ~/.bash_aliases — shared by both bash and zsh
 
 # --- General ---
 alias c=clear
@@ -20,9 +20,11 @@ alias gd='git diff'
 alias gco='git checkout'
 alias gb='git branch'
 
-# --- Workspace shortcuts ---
-alias ws='cd /data/hermes/workspace/projects'
-alias scratch='cd /data/hermes/workspace/scratch'
+# --- Workspace shortcuts (machine-specific, uses $HERMES_HOME) ---
+alias ws='cd "${HERMES_HOME}/workspace/projects"'
+alias scratch='cd "${HERMES_HOME}/workspace/scratch"'
+
+# --- Hermes service shortcuts (only useful on the Hermes machine) ---
 alias hermes-logs='sudo journalctl -u hermes-gateway -f'
 alias hermes-restart='sudo systemctl restart hermes-gateway'
 alias hermes-status='sudo systemctl status hermes-gateway'
